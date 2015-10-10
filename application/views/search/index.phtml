@@ -1,0 +1,75 @@
+{%extends "layout.phtml"%}
+{%block title%} {{title}} 迅雷下载 无码 高清下载 {{sitename}} {%endblock%}
+{%block main%}
+<div class="container">
+{%include "topsearch.phtml"%}
+<ol class="breadcrumb" ><b>排序：</b>
+    <li> 
+        <!--a href="/search/{{kw}}_ctime_{{page}}.html" {%if orderby=="ctime"%}class="highlight"{%endif%}> 发布时间 </a-->
+        <a href="/search?kw={{kw}}&od=ctime&p={{page}}" {%if orderby=="ctime"%}class="highlight"{%endif%}> 发布时间 </a>
+    </li>
+    <li> 
+        <!--a href="/search/{{kw}}_click_{{page}}.html"{%if orderby=="click"%}class="highlight"{%endif%}> 点击数 </a-->
+        <a href="/search?kw={{kw}}&od=click&p={{page}}"{%if orderby=="click"%}class="highlight"{%endif%}> 点击数 </a>
+    </li>
+    <li> 
+        <!--a href="/search/{{kw}}_length_{{page}}.html"{%if orderby=="length"%}class="highlight"{%endif%}> 文件大小 </a-->
+        <a href="/search?kw={{kw}}&od=length&p={{page}}"{%if orderby=="length"%}class="highlight"{%endif%}> 文件大小 </a>
+    </li>
+</ol>
+<script charset="gbk" src="http://p.tanx.com/ex?i=mm_32171397_11030794_37816110"></script>
+<div id="col-md-8 search_list">
+    <div>
+        <script type="text/javascript">
+            // document.write('<a style="display:none!important" id="tanx-a-mm_32171397_11030794_37810124"></a>');
+            // tanx_s = document.createElement("script");
+            // tanx_s.type = "text/javascript";
+            // tanx_s.charset = "gbk";
+            // tanx_s.id = "tanx-s-mm_32171397_11030794_37810124";
+            // tanx_s.async = true;
+            // tanx_s.src = "http://p.tanx.com/ex?i=mm_32171397_11030794_37810124";
+            // tanx_h = document.getElementsByTagName("head")[0];
+            // if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+        </script>
+    </div>
+    <ul class="media-list">
+        {%if films%}
+            {%for film in films%}
+            <li class="media">
+            <div class="media-body">
+                <h4>
+                    <a class="title" target="_blank" href="/{{film.getMagnet()}}.html">
+                        {{film.getName()}}
+                        {%if film.isNew() %}
+                        <b class="highlight">New!</b>
+                        {%endif%}
+                    </a>
+                </h4>
+                <div class="s_b">
+                    <cite>发布日期：<b>{{film.getCtime()}}</b></cite>
+                    <cite>文件大小：<span class="label label-danger"><b>{{film.getLength()}}</b></span></cite>
+                    <cite>访问热度：<b>{{film.getClick()}}</b></cite>&nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-save"><a href="{{film.getMagnet()}}">磁力下载</a></span>
+                </div>
+            </div>
+            {%endfor%}
+        {%else%}
+        <p>抱歉，没有找到关于 “<b>{{kw}}</b>” 的结果</p>
+        <p>可能还没有索引到该资源，请试试其它关键词</p>
+        {%endif%}
+        <script type="text/javascript">
+            // document.write('<a style="display:none!important" id="tanx-a-mm_32171397_11030794_37810124"></a>');
+            // tanx_s = document.createElement("script");
+            // tanx_s.type = "text/javascript";
+            // tanx_s.charset = "gbk";
+            // tanx_s.id = "tanx-s-mm_32171397_11030794_37810124";
+            // tanx_s.async = true;
+            // tanx_s.src = "http://p.tanx.com/ex?i=mm_32171397_11030794_37810124";
+            // tanx_h = document.getElementsByTagName("head")[0];
+            // if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+        </script>
+    </div>
+    {%include "pagination.phtml"%}
+</ul>
+</div>
+{%endblock%}

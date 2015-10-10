@@ -1,0 +1,32 @@
+{%extends "layout.phtml"%}
+{% block title %}BtSousuo{% endblock %}
+{%block main%}
+<div class="container search">
+    <div id="total"><span class='index_logo'>BT搜索</span>
+        <p class="text-center">
+        共 <b>{{total}}</b> 个影视资源, 今日新增 <b>{{today}}</b> 个
+        </p>
+        <div class="search_form">
+            <form action="/search" class="form-search" role="form" method="get" name="kw"/>
+                <input name="" type="hidden" value="baidu" />
+                <div class="input-group">
+                    <input type="text" class="form-control stext" id="serach" placeholder="您想看什么电影？只有想不到，没有搜不到 - -！" required autofocus x-webkit-speech name="kw" baiduSug="1"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-lg btn-primary" type="submit" onclick="search();return false;"><span class="glyphicon glyphicon-search"></span>&nbsp;搜索</button>
+                    </span>
+                </div>
+            </form>
+            {%if total%}
+            <div align="left" style="height:50px;line-height:25px;overflow:hidden; ">
+                <p></p>
+                <span style="font-size:14px;" >热门搜索：</span>
+                {%for kw in hotwords%}
+                <span style="font-size:14px;padding:100;">
+                    <a href="/search?kw={{kw}}"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;{{kw}}</a></span>&nbsp;&nbsp;&nbsp;
+                {%endfor%}
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{%endblock%}
