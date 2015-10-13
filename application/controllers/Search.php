@@ -20,11 +20,13 @@ class SearchController extends \Yaf\Controller_Abstract {
        $films  = null;
        if ($res) {
            $pages = empty($res['pages']) ? 1 : $res['pages'];
-           foreach ($res['matches'] as $match) {
-               $ids[] = $match['id'];
+           if (isset($res['matches'])) {
+               foreach ($res['matches'] as $match) {
+                   $ids[] = $match['id'];
+               }
+               $conn = new MyPDO();
+               $films = $conn->table('film')->select('*')->where('id in ('.implode(',', $ids).')')->orderBy('order by find_in_set (id, \''.implode(',', $ids).'\')')->execute();
            }
-           $conn = new MyPDO();
-           $films = $conn->table('film')->select('*')->where('id in ('.implode(',', $ids).')')->orderBy('order by find_in_set (id, \''.implode(',', $ids).'\')')->execute();
        }
 
 

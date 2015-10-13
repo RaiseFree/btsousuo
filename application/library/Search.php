@@ -110,7 +110,7 @@ class Search
                     $print .= "    '$word' found $info[hits] times in $info[docs] documents\n";
             $print .= "\n";
 
-            if ( is_array($res["matches"]) )
+            if (isset($res["matches"]) && is_array($res["matches"]) )
             {
                 $n = 1;
                 $print .= "Matches:\n";
